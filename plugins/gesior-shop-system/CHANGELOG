@@ -1,0 +1,166 @@
+[8.0.1 - 03.01.2026]
+	* Make admin page more responsive
+	* Use myaac-table class for some tables
+	* Do not show hidden items in  "the Most popular items"
+
+[8.0 - x.x.2025]
+	* Move admin page gifts into admin-pages folder
+
+[8.0-RC.2 - 11.06.2025]
+	* Add configurable PayPal return_url
+	* Fix stripe success & cancel urls
+	* Fix typo -> hasColumn (Thanks to discord user - Elios)
+		* points & gifts were not working
+	* PayPal: Send 200 OK when transaction is duplicated
+
+[8.0-RC.1 - 03.06.2025]
+	* Add possibility to extend/add custom gateways with hooks
+	* MyAAC 1.6 required
+
+[7.0-beta - 16.05.2025]
+	* fix hotpay process payment (typo)
+	* Better error handling in hotpay
+
+[7.0-alpha - 02.03.2025]
+	* add hotpay.pl gateway (original by @gesior)
+
+[6.0.4 - 09.02.2025]
+	* change schema engine + character set
+
+[6.0.3 - 23.01.2025]
+	* Reorder some code causing problems on install with missing columns in db
+	* log additional info in paypal ipn script
+
+[6.0.2 - 17.01.2025]
+	* Fixes regarding Twig v3 and MyAAC v1.0.1+ - no if in for loop
+
+[6.0.1 - 08.01.2025]
+	* fix exception in mysql 8.2 caused by most_popular_items query - SQLSTATE[42000]: Syntax error or access violation: 1055 Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column
+
+[6.0 - 19.11.2024]
+	* Fix redirect links after login
+	* Ignore history offers that doesn't exist
+
+[6.0-RC.2 - 10.11.2024]
+	* fix exception on cache clear
+
+[6.0-RC.1 - 23.07.2024]
+	* Fix duplicated Paypal transactions
+	* Possibility to use coins_transferable and any other column in accounts table
+	* Moved notifications to: payments-notify/system (example: payments-notify/paypal)
+	* Option to uninstall plugin
+	* Support for latest myaac pages subfolders
+	* csrf protection
+	* Reorganize files according to latest myaac version
+	* Adjustments for Bootstrap 4
+	* Return http status 510 in case of paypal error
+	* Remove startup.php hook
+	* Remove admin_menu entry, use admin menu hook instead
+	* Don't include lua/ folder with plugin
+	* Remove outdated gateways: dotpay, daopay, PagSeguro
+
+[5.0-beta.2 - 14.12.2023]
+	* Fix mount images
+
+[5.0-beta - 30.11.2023]
+	* Add Stripe payment method
+
+[4.0 - 11.08.2023]
+	* Fix premium time buying for tfs 1.4+ (premium_ends_at column)
+
+[4.0-RC1 - 19.07.2023]
+	* Add Most Popular Items
+	* rewrite how images are parsed
+	* (v0.9-alpha) fix gifts history not logged message
+
+[4.0-beta2 - 29.06.2023]
+	* Bump required MyAAC version to 0.8.9 (needs plugins/ folder in twig paths)
+	* Fix for 0.9-alpha: cannot find gifts/history
+	* Don't allow buying by deleted player
+	* Max count of items increased to 65535
+
+[4.0-beta - 06.06.2023]
+	* Edit items
+	* Move items (up, down)
+	* Edit categories, reset categories
+	* Fix colors in buy item page
+	* Fix PACC image
+	* Some other fixes
+
+[3.1 - 25.03.2023]
+	* move pages/payments into plugins/
+
+[3.0.1 - 13.03.2023]
+	* add gesior-shop-system-revscript.lua
+
+[3.0 - 06.02.2022]
+	* reorganise files, move most of them into plugins folder
+
+[2.5 - 06.04.2022]
+	* fix admin panel Gifts page not found (duplicated gifts.php)
+	* fix typo
+
+[2.4 - 22.04.2021]
+	* remove some random debug message being popped, like: string(99) "<HERE ITEM IMAGE>"
+	* fix PayPal sandbox URL + redirect after transaction
+	* update cacert.pem from https://curl.se/ on install
+
+[2.3 - 03.04.2021]
+	* Fix problem with redirection after transaction has been made (PayPal redirect)
+	* Do not override config.php after install - may upset some users ;)
+	* Fix payment_type being ignored (Thanks to OtLand User: DukeeH)
+	* (internal) Moving some SQL to schema.sql
+
+[2.2.1 - 29.02.2020]
+	* Force table links color to white (with !important css)
+
+[2.2 - 02.12.2019]
+	* Fix installation on some newest MySQL versions (slawkens)
+	* Refactored code: (whiteblXK)
+		* moved 'add offer' to admin panel
+		* removed Homepay service
+		* fixed delivering points in PagSeguro
+		* full twig template support
+
+[2.1.1 - 13.04.2019]
+	* enable local SSL certificate verification (this fixes points being not delivered on same systems like UniServ on Windows)
+	* write more debug/error information to paypal-error.log
+	* (internal) remove @version tag from files
+
+[2.1 - 26.06.2018]
+	* check for php CURL extension on install and when running
+	* fix for OTXServer, where doCreateItemEx function doesn't exists (in some older versions)
+	* fixed default value of some MySQL columns
+	* fixed Premium Account image (was wrong dir)
+
+[2.0 - 19.03.2018]
+	* fixed PayPal IPN not delivering points
+	* more configuration options for paypal
+	* fixed PayPal currency other than EUR
+	* fixed some errors in console (othire and others) (Lua script)
+	* fix where container or item doesn't exist (Lua script)
+	* added shebang line to the bash script
+
+[2.0-beta - 28.01.2018]
+	* new payment gateway: GoUrl.io (CryptoBox global Coins - bitcoins, speedcoin, dash and more)
+	* new payment gateway: fortumo.com (SMS Worldwide)
+	* new payment gateway: PagSeguro (Brazil payments)
+	* new payment gateway: homepay.pl (Poland SMS and Bank Transfer)
+	* simple admin panel for adding offers
+	* support for new offers: pacc, addons, mounts, unban, redskull
+	* cleaner buy points page (with images for gateways)
+	* general folder structure reorganisation (more clean now)
+	* removed support for zaypay as it doesn't exist anymore
+	* you can now hide item from showing by settings hidden to 1 in z_shop_offer table
+	* fixed some php notices and warnings
+	* fixed mysql error - Duplicate entry 'x' for key 'PRIMARY'
+	* renamed z_shop_history_item to z_shop_history (it will store history from all)
+	* general optimizations
+	* added CHANGELOG
+
+[1.1 - 31.07.2017]
+	* new Paypal API
+	* some small fixes
+
+[1.0 - 02.05.2017]
+	* First release of Gesior Shop System for MyAAC

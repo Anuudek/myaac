@@ -1,0 +1,24 @@
+[2.1 - 08.02.2025]
+	* fix "I agree" link not working
+	* do not display download successful image for loleslav theme (not enough width)
+	* do not display shadow on themes different than tibiacom
+
+[2.0 - 27.01.2024]
+	* Update for MyAAC 1.0
+	* move page to plugins folder
+
+[1.3 - 22.08.2023]
+	* fix images
+
+[1.2 - 28.05.2023]
+	* myaac 0.8.9 is now required
+	* moved images
+	* use tables.headline.html.twig from latest myaac
+
+[1.1 - 15.02.2020]
+	* add LICENSE, CHANGELOG
+	* move some code to downloads-head-end.html.twig
+	* some HTML template code optimisations
+
+[1.0 - 14.10.2017]
+	* initial release

@@ -1,0 +1,17 @@
+{
+	"name": "auction-system",
+	"description": "Automatic generator for MyAAC from the offer list of the server's offline store.",
+	"version": "1.0",
+	"author": "endless",
+	"contact": "walistonbelles1@gmail.com",
+	"install": "plugins/auction-system/install.php",
+	"uninstall": [
+		"plugins/auction.json",
+		"plugins/auction-system",
+		"system/pages/auction.php",
+		"images/auction/auction_template.psd",
+		"images/auction/bg1_06.psd",
+		"images/auction/bg1_06.png",
+		"images/auction/auction.png"
+	]
+}

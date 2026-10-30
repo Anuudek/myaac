@@ -1,0 +1,132 @@
+<form method="post" action="{{ link }}">
+	{{ csrf() }}
+	<input type="hidden" name="action" value="{% if offer.id is defined %}edit{% else %}add{% endif %}"/>
+
+	{% if offer.id is defined %}
+	<input type="hidden" name="offer_id" value="{{ offer.id }}"/>
+	{% endif %}
+
+	<div class="card card-info card-outline">
+		<div class="card-header">
+			<h5 class="m-0">{% if offer.id is defined %}Edit{% else %}Add{% endif %} offer</h5>
+		</div>
+
+		<div class="card-body">
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">Category</label>
+
+				<div class="col-sm-10">
+					{% if categories|length <= 0 %}
+						<label class="form-control">No categories in database</label>
+					{% else %}
+						<select name="category" class="form-control" id="category">
+							{% for id, name in categories %}
+								<option value="{{ id }}" {% if offer.category_id == id %}selected{% endif %}>{{ name }}</option>
+							{% endfor %}
+						</select>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="type" class="col-sm-2 control-label">Type</label>
+
+				<div class="col-sm-10">
+						<select name="type" class="form-control" id="type">
+							{% for type in types %}
+								<option value="{{ type }}" {% if offer.type == type %}selected{% endif %}>{{ type }}</option>
+							{% endfor %}
+						</select>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="points" class="col-sm-2 control-label">Points</label>
+
+				<div class="col-sm-10">
+					<input type="number" class="form-control" id="points" name="points" placeholder="Points" value="{{ offer.points }}" required/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="offer_name" class="col-sm-2 control-label">Offer Name</label>
+
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="offer_name" name="offer_name" placeholder="Offer Name" value="{{ offer.name }}" required/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="description" class="col-sm-2 control-label">Description</label>
+
+				<div class="col-sm-10">
+					<textarea class="form-control" id="description" name="description" rows="5" cols="50" placeholder="Offer Description (you can use HTML) (can be empty)">{{ offer.description }}</textarea>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Extra</label>
+
+				<div id="extra" class="col-sm-10"></div>
+			</div>
+		</div>
+
+		<div class="card-footer">
+			<input type="submit" class="btn btn-info" value="Save"/>
+			<input type="button" onclick="window.location = '{{ link }}';" class="btn btn-default" value="Cancel"/>
+		</div>
+	</div>
+</form>
+
+<script type="text/javascript">
+	$(function() {
+		$('#type').change(function() {
+			updateFields();
+		});
+
+		updateFields();
+		initFields();
+	});
+
+	function updateFields() {
+		let value = $('#type').val();
+		let $extra = $('#extra');
+		$extra.empty();
+
+		if(value === 'item') {
+			$extra.append('<div class="input-group"><input class="form-control" type="number" name="item_id" min="100" placeholder="Item ID" required/><input class="form-control" type="number" name="item_count" min="1" max="65535" placeholder="Item Count" required/></div>');
+		} else if(value === 'container') {
+			$extra.append('<div class="input-group"><input class="form-control" type="number" name="item_id" min="100" placeholder="Item ID" required/><input class="form-control" type="number" name="item_count" min="1" max="65535" placeholder="Item Count" required/></div><br/>');
+			$extra.append('<div class="input-group"><input class="form-control" type="number" name="container_id" min="100" placeholder="Container ID" required/><input class="form-control" type="number" name="container_count" min="1" max="100" placeholder="Container Count" required/></div>');
+		} else if(value === 'addon') {
+			$extra.append('<div class="input-group"><input class="form-control" type="number" name="look_female" min="1" placeholder="Female (girl) Look Type" required/><input class="form-control" type="number" name="addons_female" min="0" max="3" placeholder="Female Addons (0 - just outfit, 1, 2 or 3 for both)" required/></div><br/>');
+			$extra.append('<div class="input-group"><input class="form-control" type="number" name="look_male" min="1" placeholder="Male (boy) Look Type" required/><input class="form-control" type="number" name="addons_male" min="0" max="3" placeholder="Male Addons (0 - just outfit, 1, 2 or 3 for both)" required/></div>');
+		} else if(value === 'mount') {
+			$extra.append('<input class="form-control" type="number" name="mount_id" min="1" placeholder="Mount ID (take from mounts.xml)" required/>');
+		} else if(value === 'pacc') {
+			$extra.append('<input class="form-control" type="number" name="days" min="1" placeholder="Premium Days" required/>');
+		}
+	}
+
+	function initFields() {
+		let value = $('#type').val();
+		if(value === 'item') {
+			$('input[name=item_id]').val({{ offer.item_id }});
+			$('input[name=item_count]').val({{ offer.item_count }});
+		} else if(value === 'container') {
+			$('input[name=item_id]').val({{ offer.item_id }});
+			$('input[name=item_count]').val({{ offer.item_count }});
+			$('input[name=container_id]').val({{ offer.container_id }});
+			$('input[name=container_count]').val({{ offer.container_count }});
+		} else if(value === 'addon') {
+			$('input[name=look_female]').val({{ offer.look_female }});
+			$('input[name=addons_female]').val({{ offer.addons_female }});
+			$('input[name=look_male]').val({{ offer.look_male }});
+			$('input[name=addons_male]').val({{ offer.addons_male }});
+		} else if(value === 'mount') {
+			$('input[name=mount_id]').val({{ offer.mount_id }});
+		} else if(value === 'pacc') {
+			$('input[name=days]').val({{ offer.days }});
+		}
+	}
+</script>

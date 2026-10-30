@@ -1,0 +1,109 @@
+<div class="card card-info card-outline">
+	<div class="card-header">
+		<h5 class="m-0">Gifts System
+			<form method="post" class="float-right">
+				{{ csrf() }}
+				<input type="hidden" name="action" value="offer_form" />
+				<button type="submit" class="btn btn-sm btn-success">New</button>
+			</form>
+		</h5>
+	</div>
+	<div class="card-body">
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table table-striped table-responsive d-md-table">
+					<thead>
+					<tr>
+						<th width="5%">ID</th>
+						<th>Name</th>
+						<th>Category</th>
+						<th>Type</th>
+						<th>Price</th>
+						<th>Information</th>
+						<th>Description</th>
+						<th>Hidden</th>
+						<th>Ordering</th>
+						<th style="min-width: 190px;">Options</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					{% set i = 0 %}
+					{% for offer in offers %}
+						{% set i = i + 1 %}
+						<tr>
+							<td>{{ offer.id }}</td>
+							<td>{{ offer.name }}</td>
+							<td>{{ categories[offer.category_id] }}</td>
+							<td>{{ offer.type|lower }}</td>
+							<td>{{ offer.points }}</td>
+							<td>{{ offer.information }}</td>
+							<td>{{ offer.description|raw }}</td>
+							<td>{% if offer.hidden %}Yes{% else %}No{% endif %}</td>
+							<td>{{ offer.ordering }}</td>
+							<td>
+								<form action="{{ link }}" method="post" style="float: left">
+									{{ csrf() }}
+									<input type="hidden" name="action" value="toggle_hidden" />
+									<input type="hidden" name="id" value="{{ offer.id }}" />
+
+									<button type="submit" class="btn {% if offer.hidden != 1 %}btn-primary{% else %}btn-default{% endif%} btn-sm btn-flat" title="{% if offer.hidden != 1 %}Hide{% else %}Show{% endif %}">
+										{% if offer.hidden != 1 %}
+											<i class="fa fa-eye"></i>
+										{% else %}
+											<i class="fa fa-eye-slash"></i>
+										{% endif %}
+									</button>
+								</form>
+
+								<form action="{{ link }}" method="post" style="float: left">
+									{{ csrf() }}
+									<input type="hidden" name="action" value="offer_form" />
+									<input type="hidden" name="id" value="{{ offer.id }}" />
+
+									<button type="submit" class="btn btn-success btn-sm edit btn-flat" title="{% if offer.hidden != 1 %}Hide{% else %}Show{% endif %}">
+										<i class="fa fa-edit"></i>
+									</button>
+								</form>
+
+								<form action="{{ link }}" method="post" style="float: left">
+									{{ csrf() }}
+									<input type="hidden" name="action" value="delete" />
+									<input type="hidden" name="id" value="{{ offer.id }}" />
+
+									<button type="submit" class="btn btn-danger btn-sm delete btn-flat" onclick="return confirm('Are you sure?');" title="Delete">
+										<i class="fa fa-trash"></i>
+									</button>
+								</form>
+
+								{% if i != 1 %}
+									<form action="{{ link }}" method="post" style="float: left">
+										{{ csrf() }}
+										<input type="hidden" name="action" value="moveup" />
+										<input type="hidden" name="id" value="{{ offer.id }}" />
+
+										<button type="submit" class="btn btn-info btn-sm delete btn-flat" title="Move up">
+											<i class="fa fa-arrow-up"></i>
+										</button>
+									</form>
+								{% endif %}
+								{% if i != last %}
+									<form action="{{ link }}" method="post" style="float: left">
+										{{ csrf() }}
+										<input type="hidden" name="action" value="movedown" />
+										<input type="hidden" name="id" value="{{ offer.id }}" />
+
+										<button type="submit" class="btn btn-info btn-sm delete btn-flat" title="Move up">
+											<i class="fa fa-arrow-down"></i>
+										</button>
+									</form>
+								{% endif %}
+							</td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

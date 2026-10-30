@@ -1,0 +1,32 @@
+{
+	"name": "Gesior Shop System",
+	"description": "This is shop system taken from Gesior, modified for MyAAC.",
+	"version": "8.0.1",
+	"type": "plugin",
+	"license": "GPLv3",
+	"author": "Gesior, slawkens, whiteblXK",
+	"contact": "slawkens@gmail.com",
+	"hooks": {
+		"admin-menu": {
+			"type": "HOOK_ADMIN_MENU",
+			"file": "plugins/gesior-shop-system/hooks/admin-menu.php"
+		},
+		"cache-clear": {
+			"type": "HOOK_CACHE_CLEAR",
+			"file": "plugins/gesior-shop-system/hooks/cache-clear.php"
+		}
+	},
+	"install": "plugins/gesior-shop-system/install.php",
+	"uninstall": [
+		"plugins/gesior-shop-system.json",
+		"plugins/gesior-shop-system"
+	],
+	"require": {
+		"myaac": "1.6",
+		"php": "8.1",
+		"php-ext": "curl"
+	},
+	"autoload": {
+		"init": true
+	}
+}

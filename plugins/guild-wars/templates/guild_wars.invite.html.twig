@@ -1,0 +1,37 @@
+<form id="form_{{ enemyGuild.getId() }}" action="{{ getLink('guild-wars/invite-guild') }}">
+	<input type="hidden" name="guild" value="{{ guild.getId() }}"/>
+	<input type="hidden" name="enemy" value="{{ enemyGuild.getId() }}"/>
+	<table>
+		<tr>
+			{% if canFragLimit %}
+			<td>
+				<label for="frag_limit">Frag Limit:</label>
+				<input id="frag_limit" type="number" name="frag_limit" min="1" max="{{ constant('GUILD_WARS_MAX_FRAGS') }}"/>
+			</td>
+			{% endif %}
+			{% if canDurationDays %}
+				<td>
+					<label for="duration_days">Duration (in days):</label>
+					<input id="duration_days" type="number" name="duration_days" min="1" max="{{ constant('GUILD_WARS_MAX_DURATION') }}"/>
+				</td>
+			{% endif %}
+			{% if canBounty %}
+			<td>
+				<label for="bounty">Bounty:</label>
+				<input id="bounty" type="number" name="bounty" min="1" max="{{ constant('GUILD_WARS_MAX_BOUNTY') }}"/>
+			</td>
+			{% endif %}
+			<td>
+				{% set button_name = "Invite to war" %}
+				{{ include('buttons.base.html.twig') }}
+			</td>
+		</tr>
+	</table>
+</form>
+<script>
+	$(function () {
+		$('#form_{{ enemyGuild.getId() }}').on('submit',function(){
+			return confirm('Are you sure that you want to invite guild {{ enemyGuild.getName() }}?')
+		});
+	});
+</script>

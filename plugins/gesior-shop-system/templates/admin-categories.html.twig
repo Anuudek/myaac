@@ -1,0 +1,30 @@
+<div class="card card-info card-outline">
+	<div class="card-header">
+		<h5 class="m-0">Categories</h5>
+		<form action="{{ link }}" method="post" style="float: left">
+			{{ csrf() }}
+			<input type="hidden" name="action" value="reset_categories" />
+			<input type="hidden" name="id" value="{{ id }}" />
+			<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');" title="Reset Categories">Reset Categories</button>
+		</form>
+	</div>
+
+	<form method="post" action="{{ link }}">
+		{{ csrf() }}
+		<input type="hidden" name="action" value="edit_categories"/>
+
+		<div class="card-body">
+			<div class="form-group">
+				<label for="categories" class="col-sm-2 control-label">Categories (comma separated)</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" id="categories" name="categories" placeholder="Categories" required>{{ categories }}</textarea>
+				</div>
+			</div>
+		</div>
+
+		<div class="card-footer">
+			<input type="submit" class="btn btn-info" value="Save"/>
+			<input type="button" onclick="window.location = '{{ link }}';" class="btn btn-default" value="Cancel"/>
+		</div>
+	</form>
+</div>

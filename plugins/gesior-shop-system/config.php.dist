@@ -1,0 +1,130 @@
+<?php
+/**
+ * enable gifts system?
+ * paste this into config.local.php in your main directory:
+ * 		$config['gifts_system'] = true;
+ */
+
+$config['donation_type'] = 'points'; // what should be added to player account? points/coins
+
+// display most popular items bought in shop (top #3)?
+$config['enable_most_popular_items'] = true;
+
+/**
+ * default colors of outfits/addons in addons category
+ * doesn't matter for othire and other servers without addons
+ * you can use this outfit generator: http://sleqqus.idl.pl/tlg
+ */
+$config['shop_outfit_colors'] = array(
+	'head' => 4,
+	'body' => 38,
+	'legs' => 87,
+	'feet' => 114,
+);
+
+/**
+ * paypal.com configuration
+ */
+$config['paypal'] = array(
+	'enabled' => true,
+	'email' => 'your_email@domain.com',
+	'contact_email' => '', // if empty, email is used
+	'item_name' => 'your-domain.com donation.',
+	'payment_type' => '_xclick', // '_xclick' (Buy Now) or '_donations'
+	'currency_code' => 'EUR', // https://developer.paypal.com/docs/integration/direct/rest/currency-codes/
+	'use_sandbox' => false, // set to true if you want to test IPN in sandbox mode
+	'return_url' => getLink('gifts') . '?success',
+	'terms' => true, // display terms?
+	'options' => array( // cost in EUR => points
+		'5.00' => 30,
+		'10.00' => 60,
+		'20.00' => 130
+	)
+);
+
+/**
+ * stripe.com configuration
+ * notify URL should be set in stripe.com: http://your-host.com/payments-notify/stripe
+ */
+$config['stripe'] = [
+	// 'false' blocks new payments, it will still process old payment reports
+	'enabled' => true,
+
+	'secret_key' => 'sk_test_asdasd123',
+	'endpoint_secret' => 'whsec_asdasd123',
+
+	// defaults should be ok, but you can change
+	'success_url' => getLink('gifts') . '?success',
+	'cancel_url' => getLink('gifts') . '?cancel',
+
+	'payments' => [
+		['price' => '10', 'currency' => 'USD', 'points' => '100', 'name' => '100 premium points on Your OTS'],
+		['price' => '20', 'currency' => 'USD', 'points' => '200', 'name' => '200 premium points on Your OTS'],
+		['price' => '30', 'currency' => 'USD', 'points' => '300', 'name' => '300 premium points on Your OTS'],
+		['price' => '40', 'currency' => 'USD', 'points' => '400', 'name' => '400 premium points on Your OTS'],
+		['price' => '50', 'currency' => 'USD', 'points' => '500', 'name' => '500 premium points on Your OTS'],
+	],
+];
+
+/**
+ * fortumo.com configuration
+ * rest of the configuration you can do on fortumo.com
+ * notify URL should be set in fortumo.com: http://your-host/payments-notify/fortumo
+ */
+$config['fortumo'] = array(
+	'enabled' => true,
+	'service_id' => 'your service id here', // get your service id on http://fortumo.com
+	'secret' => 'your secret key here' // get your secret on http://fortumo.com
+);
+
+/**
+ * https://gourl.io configuration
+ */
+$config['cryptobox'] = array(
+	'enabled' => true,
+
+	// to accept all payments types, use this
+	// array('bitcoin', 'bitcoincash', 'litecoin', 'dogecoin', 'dash', 'speedcoin', 'reddcoin', 'potcoin', 'feathercoin', 'vertcoin', 'peercoin', 'monetaryunit'),
+	'available_payments' => array('bitcoin'),
+
+	// Goto  https://gourl.io/info/memberarea/My_Account.html
+	// You need to create record for each your coin and get private/public keys
+	// Place Public/Private keys for all your available coins from $available_payments
+	'all_keys' => array(
+		"bitcoin"  => array("public_key" => "-your public key for Bitcoin box-",  "private_key" => "-private key for Bitcoin box-"),
+		//"dogecoin" => array("public_key" => "-your public key for Dogecoin box-", "private_key" => "-private key for Dogecoin box-"),
+		//"speedcoin"  => array("public_key" => "21679AA6pwgOSpeedcoin77SPDPUBMgxMq81Fn9nMCnWTGrmnz",  "private_key" => "21679AA6pwgOSpeedcoin77SPDPRV6HU31FlkaNESfjomGq2yD"),
+	),
+
+	'default_language' => "en",
+	'default_payment' => "bitcoin",
+	'options' => array( // cost in USD => points
+		'5.00' => 30,
+		'10.00' => 60,
+		'20.00' => 130
+	)
+);
+
+$config['hotpay'] = [
+	// it only disables possibility to create new payments, old payments will still add points
+	'enabled' => false,
+
+	/*
+	 * Adres do notyfikacji do ustawienia w panelu to: https://twoja-domena.pl/payments-notify/hotpay
+	 * Dodać w firewall, Cloudflare itp. IP serwerów HotPay. Lista jest w dokumentacji HotPay.
+	 * HotPay serwery notyfikacji: https://dokumentacja.hotpay.pl/#inicjalizacja-patnosci
+	*/
+
+	'haslo_z_ustawien' => 'haslo_ustawione_w_panelu_hotpay',
+	'sekret_uslugi' => 'token_wygenerowany_przez_hotpay',
+	'nazwa_uslugi' => 'ustawiona_nazwa_uslugi',
+
+	'adres_powrotu' => getLink('gifts'),
+
+	'options' => [
+		// PLN => points
+		'5' => 10,
+		'10' => 25,
+		'20' => 60,
+	],
+];

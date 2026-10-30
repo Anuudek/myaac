@@ -1,0 +1,19 @@
+{
+	"name": "Guild Wars",
+	"description": "Support for Guild Wars.",
+	"version": "2.0",
+	"type": "plugin",
+	"license": "GPLv3",
+	"author": "Gesior, slawkens",
+	"contact": "www.my-aac.org",
+	"hooks": {
+		"guild-wars-guilds-after-invited-characters": {
+			"type": "GUILDS_AFTER_INVITED_CHARACTERS",
+			"file": "plugins/guild-wars/hooks/guilds-after-invited-characters.php"
+		}
+	},
+	"uninstall": [
+		"plugins/guild-wars.json",
+		"plugins/guild-wars"
+	]
+}

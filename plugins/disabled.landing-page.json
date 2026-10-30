@@ -1,0 +1,21 @@
+{
+	"name": "Landing Page",
+	"description": "Landing page for MyAAC.",
+	"version": "1.1",
+	"type": "plugin",
+	"license": "GPLv3",
+	"author": "Frostie, slawkens, tobi132",
+	"contact": "otland.net",
+	"hooks": [
+		{
+			"type": "STARTUP",
+			"file": "plugins/landing-page/hooks/startup.php"
+		}
+	],
+	"install": "plugins/landing-page/install.php",
+	"uninstall": [
+		"plugins/landing-page.json",
+		"plugins/landing-page",
+		"landing"
+	]
+}

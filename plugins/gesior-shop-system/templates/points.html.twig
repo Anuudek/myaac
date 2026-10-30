@@ -1,0 +1,27 @@
+<div class="main-box">
+	{% for gateway in gateways %}
+		{{ gateway|raw }}
+	{% endfor %}
+</div>
+<style>
+.main-box {
+	margin: 0 auto;
+	 display: inline-block;
+    height: 100%;
+}
+.floating-box {
+	float: left;
+	margin-left: 30px;
+}
+.floating-logo-box {
+	height: 120px;
+	line-height:8em;
+}
+.floating-logo {
+	vertical-align: bottom;
+}
+.info-box {
+	height: 70px;
+	text-align: center;
+}
+</style>

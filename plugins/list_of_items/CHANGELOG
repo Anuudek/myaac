@@ -1,0 +1,33 @@
+[5.0 - 03.04.2025]
+	* Support the canary engine, with changed items.xml
+	* Save attributes of every item
+	* Display warning for duplicates
+	* Rename table to myaac_list_of_items, to prevent missing column
+	* Add install.php script
+	* Add notice about slow load
+	* Use strtolower for attribute keys
+
+[4.0.1 - 09.02.2025]
+	* change db engine to InnoDB
+
+[4.0 - 27.01.2024]
+	* Update for MyAAC 1.0
+	* move page to plugins folder
+	* Fix duplicate exception
+
+[3.0 - 23.12.2021]
+	* refactor code, now everything is in two files
+	* fix link not working
+
+[2.0 - 08.06.2021]
+	* no need to edit items.xml anymore!! it detects automatically
+	* move html code to twig
+	* change table colors
+	* fix "fromid" -> "toid" items.xml detection
+	* fix errors with too long name and description
+	* fix some warnings about undefined variables
+	* add notice about items reloaded
+	* shortened code
+
+[1.0 - 18.01.2021]
+	* initial release

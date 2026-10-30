@@ -1,0 +1,8 @@
+[v1.1 - 32.12.2025]
+	* Fix infinite redirect loop
+	* Fix server port detection issue (from config.lua)
+	* Use cookies instead of session
+	* Time for cookie configurable in config.php
+
+[v1.0 - unknown date]
+	* Initial release
